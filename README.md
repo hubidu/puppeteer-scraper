@@ -16,12 +16,12 @@ module.exports = async function GotoCHECK24Main(ctx, I) {
 Then in src/crawl-script.js
 
 ```js
-    const runScript = require('./runner');
-    const scriptFn = require('./scripts/check/login');
+const runScript = require('./runner');
+const scriptFn = require('./scripts/check/login');
 
-    async function() {
-        await runScript(scriptFn, './_out', {});
-    }()
+async function() {
+    await runScript(scriptFn, './_out', {});
+}()
 ```
 
 
