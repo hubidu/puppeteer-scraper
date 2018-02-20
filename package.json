@@ -1,7 +1,7 @@
 {
   "name": "puppetry",
   "version": "0.0.1",
-  "description": "",
+  "description": "Implement crawlers using a sane api on top of codeceptjs and puppeteer.",
   "main": "runner.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,6 +13,6 @@
     "puppeteer": "^1.0.0",
     "rimraf": "^2.6.2"
   },
-  "author": "",
+  "author": "hubidev27@gmail.com",
   "license": "ISC"
 }
