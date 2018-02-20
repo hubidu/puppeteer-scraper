@@ -1,7 +1,7 @@
 {
-  "name": "puppetry",
+  "name": "puppeteer-crawl",
   "version": "0.0.1",
-  "description": "Implement crawlers using a sane api on top of codeceptjs and puppeteer.",
+  "description": "Implement web page crawler scripts using a sane api on top of codeceptjs and puppeteer",
   "main": "runner.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
