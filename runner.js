@@ -1,4 +1,4 @@
-const withBrowser = require('../puppetry/with-browser');
+const withBrowser = require('./with-browser');
 
 module.exports = async (scriptFn, outputDir, ctx) => withBrowser({
   dir: outputDir,
