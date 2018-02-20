@@ -1,4 +1,4 @@
-# puppetry
+# puppeteer-crawl
 
 Implement crawlers using a sane api on top of codeceptjs and puppeteer.
 
