@@ -44,7 +44,7 @@ const onAfterCmd = async (actor, fn) => {
 // const onBeforeCmd = async (actor, fn) => {};
 
 const formatArgs = args => {
-  if (args.some(arg => typeof arg === 'string' && (arg.indexOf('login') || arg.indexOf('password') || arg.indexOf('pin')))) {
+  if (args.some(arg => typeof arg === 'string' && (arg.indexOf('login') >= 0 || arg.indexOf('password') >= 0 || arg.indexOf('pin') >= 0))) {
     return '*** CREDENTIALS ***';
   }
   return args.join(' ,');

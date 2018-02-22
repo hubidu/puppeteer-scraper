@@ -22,10 +22,10 @@ const OUTPUT_BASE_DIR = './_out';
 async function perform(taskFn, ...rest) {
   if (!typeof taskFn === 'function') throw new Error('taskFn must be a function');
 
-  console.log('');
-  console.log(taskFn.name);
+  log('');
+  log(`${taskFn.name} entering...`);
   const res = await taskFn(this, ...rest);
-  console.log('');
+  log(`${taskFn.name} exiting`);
 
   return res;
 }
@@ -50,6 +50,7 @@ async function withBrowser(opts = { show: false, ctx: {} }, fn) {
     // windowSize: '1900x1024',
     show: opts.show,
     waitForAction: 0,
+    waitForTimeout: 10000,    
     chrome: {
       ignoreHTTPSErrors: true,
       // dumpio: true,
@@ -109,7 +110,7 @@ async function withBrowser(opts = { show: false, ctx: {} }, fn) {
   }
 
   const duration = (Date.now() - start) / 1000;
-  return Object.assign({
+  const returnValue = Object.assign({
     startedAt: start,
     outputDir: finalCtx.outputDir,
     success,
@@ -118,6 +119,8 @@ async function withBrowser(opts = { show: false, ctx: {} }, fn) {
     result: res,
     report: I._report,
   });
+
+  return returnValue
 }
 
 module.exports = withBrowser;
