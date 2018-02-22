@@ -1,6 +1,6 @@
 {
   "name": "puppeteer-scraper",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Implement web page crawler scripts using a sane api on top of codeceptjs and puppeteer",
   "main": "runner.js",
   "scripts": {
