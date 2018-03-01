@@ -30,18 +30,38 @@ const correctStacktrace = stackOfMethod => {
 const isAction = fnName => ['click'].indexOf(fnName.toLowerCase()) > -1;
 
 const onAfterCmd = async (actor, fn) => {
-  if (isAction(fn.name)) {
-    debug(`[${fn.name}] waiting for navigation...`);
-    try {
-      await actor.page.waitForNavigation({ timeout: 5000, waitUntil: ['domcontentloaded', 'networkidle0'] });
-    } catch (err) {
-      console.log('WARNING Failed to wait for navigation', err);
-    }
-    debug(`[${fn.name}] DONE waiting for navigation`);
-  }
+  // if (isAction(fn.name)) {
+  //   debug(`[${fn.name}] waiting for navigation...`);
+  //   try {
+  //     await actor.page.waitForNavigation({ timeout: 5000, waitUntil: ['domcontentloaded', 'networkidle0'] });
+  //   } catch (err) {
+  //     console.log('WARNING Failed to wait for navigation', err);
+  //   }
+  //   debug(`[${fn.name}] DONE waiting for navigation`);
+  // }
 };
 
-// const onBeforeCmd = async (actor, fn) => {};
+const onBeforeCmd = async (actor, fn, args) => {
+  const selectorFrom = arg => {
+    if (!arg) return undefined
+    if (arg.indexOf('#') === 0 || arg.indexOf('.') === 0 || arg.indexOf('span') === 0 || arg.indexOf('button') === 0) {
+      return arg
+    }
+    return undefined
+  }
+  const getCssSelector = (fn, args) => {
+    switch (fn.name) {
+      case 'click': return selectorFrom(args.length === 1 ? args[0] : args[1])
+    }
+    return undefined;
+  }
+
+  const cssSel = getCssSelector(fn, args)
+  if (!cssSel) return
+
+  log('AUTOWAIT', cssSel)
+  await actor.page.waitFor(cssSel, { timeout: 5000 })
+};
 
 const formatArgs = args => {
   if (args.some(arg => typeof arg === 'string' && (arg.indexOf('login') >= 0 || arg.indexOf('password') >= 0 || arg.indexOf('pin') >= 0))) {
@@ -82,12 +102,13 @@ const decoratorFn = (actor, fn) =>
     const stackOfMethod = new Error();
 
     try {
-      // await onBeforeCmd(actor, fn);
+      await onBeforeCmd(actor, fn, args);
+
       const res = await boundFn(...args);
 
       logStep(actor, fn, args);
 
-      await onAfterCmd(actor, fn);
+      await onAfterCmd(actor, fn, args);
 
       return res;
     } catch (err) {
