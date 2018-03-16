@@ -52,6 +52,7 @@ const onBeforeCmd = async (actor, fn, args) => {
   const getCssSelector = (fn, args) => {
     switch (fn.name) {
       case 'click': return selectorFrom(args.length === 1 ? args[0] : args[1])
+      case 'seeElement': return selectorFrom(args[0])
     }
     return undefined;
   }

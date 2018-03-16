@@ -7,10 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "codeceptjs": "^1.1.5",
+    "codeceptjs": "^1.1.6",
     "debug": "^3.1.0",
     "mkdirp": "^0.5.1",
-    "puppeteer": "^1.0.0",
+    "puppeteer": "^1.1.1",
     "rimraf": "^2.6.2"
   },
   "author": "hubidev27@gmail.com",
