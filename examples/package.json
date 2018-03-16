@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "puppeteer-scrapy": "0.0.5"
+    "cheerio": "^1.0.0-rc.2",
+    "puppeteer-scrapy": "0.0.6"
   }
 }
