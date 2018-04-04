@@ -1,0 +1,18 @@
+{
+  "name": "puppeteer-scrapy",
+  "version": "0.0.7",
+  "description": "Implement web page crawler scripts using a sane api on top of codeceptjs and puppeteer",
+  "main": "runner.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "codeceptjs": "^1.1.7",
+    "debug": "^3.1.0",
+    "mkdirp": "^0.5.1",
+    "puppeteer": "^1.2.0",
+    "rimraf": "^2.6.2"
+  },
+  "author": "hubidev27@gmail.com",
+  "license": "ISC"
+}
