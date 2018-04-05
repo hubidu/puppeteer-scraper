@@ -41,7 +41,10 @@ const onAfterCmd = async (actor, fn) => {
   // }
 };
 
+const isAutoscreenshotCmd = fn => ['fill', 'click', 'see', 'grab'].some(prefix => fn.name.indexOf(prefix) === 0)
+
 const onBeforeCmd = async (actor, fn, args) => {
+  const toFilename = str => /[a-zA-z0-9,-]+/g.exec(str);
   const selectorFrom = arg => {
     if (!arg) return undefined
     if (arg.indexOf('#') === 0 || arg.indexOf('.') === 0 || arg.indexOf('span') === 0 || arg.indexOf('button') === 0) {
@@ -63,11 +66,18 @@ const onBeforeCmd = async (actor, fn, args) => {
     actor.page.setDefaultNavigationTimeout(60000)
   }
 
+  // AUTO-WAIT for element
   const cssSel = getCssSelector(fn, args)
-  if (!cssSel) return
+  if (cssSel) {
+    log('AUTOWAIT', cssSel)
+    await actor.page.waitFor(cssSel, { timeout: 10000 }) 
+  }
 
-  log('AUTOWAIT', cssSel)
-  await actor.page.waitFor(cssSel, { timeout: 10000 })
+  // AUTO-SCREENSHOT
+  // TODO Use your own screenshot function to get rid of setting the global output dir
+  if (process.env.DEBUG && isAutoscreenshotCmd(fn)) {
+    await actor.saveScreenshot(`${Date.now()}-I.${toFilename(fn.name)}[${toFilename(args.join(','))}].png`);
+  }
 };
 
 const formatArgs = args => {
