@@ -1,6 +1,6 @@
 # puppeteer-scraper
 
-Implement scrapers using a sane api on top of codeceptjs and puppeteer.
+Implement scrapers with a sane api. Thanks to codeceptjs and puppeteer.
 
 ## Use it in your project
 
