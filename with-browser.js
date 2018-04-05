@@ -100,6 +100,8 @@ async function withBrowser(opts = { show: false, ctx: {} }, fn) {
     log('');
     msg = err.toString();
     console.log(err);
+    // Attach error to result
+    res.error = err;
     log('  ', err.stack.split('\n')[1]);
     log('');
   } finally {
